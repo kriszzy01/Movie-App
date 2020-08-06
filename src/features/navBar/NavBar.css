@@ -1,0 +1,95 @@
+header {
+    display: flex;
+    padding: 2rem;
+}
+
+.navBar {
+    padding-top: 4rem;
+}
+
+.navBar li {
+    line-height: 1.5;
+    font-size: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.navBar li a {
+    padding: 0.3rem 0 0.3rem 2rem ;
+}
+
+.navBarToggle {
+    z-index: 10;
+    margin-right: auto;
+}
+
+.sideBar {
+    background-color: rgb(22, 22, 22);
+    width: 7rem;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    transition: 0.5s;
+}
+
+.showSideBar {
+    transform: translate(0, 0);
+}
+
+.hideSideBar {
+    transform: translate(-8rem, 0);
+}
+
+.searchContainer {
+    display: flex;
+    margin-left: auto;
+    place-items: center;
+}
+
+.showSearchInput input {
+    width: 95%;
+    color: black;
+    padding: 0.1rem;
+    border: 1px groove transparent;
+}
+
+.showSearchInput input:focus {
+    box-shadow: 0px 0px 5px cyan;
+    border-color: cyan;
+}
+
+.hideSearchInput {
+    width: 0rem;
+    overflow: hidden;
+}
+
+.active {
+    border-left: 2px solid cyan;
+    color: cyan;
+}
+
+@media screen and (min-width: 600px) {
+    .navBarToggle {
+        display: none;
+    }
+
+    .sideBar {
+        width: 10rem;
+    }
+
+    .hideSideBar {
+        transform: translate(0, 0px);
+    }
+
+    .navBar {
+        padding-top: 2rem;
+    }
+
+    .navBar li {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .showSearchInput input {
+        padding: 0.5rem;
+    }
+}
