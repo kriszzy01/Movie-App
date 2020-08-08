@@ -1,0 +1,22 @@
+.card {
+    border: 1px solid white;
+    width: 150px;
+    height: 200px;
+    margin-bottom: 1rem;
+}
+
+.card img {
+    width: inherit;
+    height: inherit;
+}
+
+.card p:nth-child(2) {
+    font-weight: bold;
+    font-size: 0.6rem;
+    letter-spacing: 0;
+}
+
+.card p {
+    font-size: 0.5rem;
+    letter-spacing: 0;
+}

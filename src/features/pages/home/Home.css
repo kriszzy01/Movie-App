@@ -1,0 +1,15 @@
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center;
+    gap: 2rem 1rem;
+    padding: 0.5rem;
+    padding-top: calc(10vh + 0.5rem);
+}
+
+@media screen and (min-width: 600px) {
+    main {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+    }
+}

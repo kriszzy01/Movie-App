@@ -6,10 +6,9 @@
     padding: 0;
     font-family: sans-serif;
     list-style: none;
-    color: white;
+    letter-spacing: 0.1rem;
 }
 
-#root {
-    background-color: black;
-    height: 100vh;
+:root {
+    font-size: 1.5rem;
 }

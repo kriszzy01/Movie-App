@@ -1,0 +1,56 @@
+header {
+    height: 10vh;
+    display: flex;
+    place-items: center;
+    color: white;
+    border-bottom: 0.1rem groove grey;
+    padding: 0.5rem;
+    background-color: #000000;
+    position: fixed;
+    width: 100vw;
+}
+
+header input {
+    margin: 0 0.5rem 0 auto;
+    padding: 0.2rem;
+}
+
+nav {
+    position: absolute;
+    transition: 0.5s;
+    background-color: #000000;
+    top: 10vh;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 10vh);
+    padding: 0.4rem;
+    box-shadow: 0 0 0.1rem grey;
+}
+
+nav li {
+    margin: 1rem 0;
+}
+
+nav a {
+    color: white;
+}
+
+.showNav {
+    transform: translate(0, 0);
+}
+
+.hideNav {
+    transform: translate(-100vw, 0);
+}
+
+.showSearchInput {
+    visibility: visible;
+}
+
+.hideSearchInput {
+    visibility: hidden;
+}
+
+.searchBtn {
+    margin-right: 0.4rem;
+}
