@@ -1,0 +1,25 @@
+.pagination {
+    display: flex;
+    margin: auto;
+    place-items: center;
+    margin-top: 1rem;
+}
+
+.pagination button {
+    border: none;
+    border-radius: 1rem;
+    background-color: black;
+    color: white;
+    font-size: 0.6rem;
+    padding: 0.3rem;
+}
+
+.pagination p {
+    letter-spacing: 0;
+    border: 0.1rem solid black;
+    border-radius: 0;
+    background-color: transparent;
+    font-size: 0.6rem;
+    padding: 0.3rem;
+    margin: 0 0.5rem
+}

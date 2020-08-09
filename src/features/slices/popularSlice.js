@@ -1,20 +1,24 @@
-import {createSlice, createAsyncThunk, createEntityAdapter} from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createEntityAdapter } from "@reduxjs/toolkit";
 
 const popularAdapter = createEntityAdapter();
 
 const initialState = popularAdapter.getInitialState({
-    currentPage: "",
+    currentPage: 1,
     totalPages: "",
     status: "idle",
     error: null
 });
 
+export const currentPopularPage = state => state.popular.currentPage;
+
 export const fetchPopularMovies = createAsyncThunk("popular/fetchPopularMovies",
-    async () => {
+    async (popular, {getState}) => {
         const api_url = "https://api.themoviedb.org/3/movie/popular";
         const key = "600f5cedd909fa355f1beee66846ab98";
-        
-        const request_url = `${api_url}?api_key=${key}&language=en-US`;
+
+        const {currentPage} = getState().popular;
+
+        let request_url = `${api_url}?api_key=${key}&language=en-US&page=${currentPage}`;
 
         const response = await fetch(request_url);
         return response.json();
@@ -24,31 +28,45 @@ export const fetchPopularMovies = createAsyncThunk("popular/fetchPopularMovies",
 const popularSlice = createSlice({
     name: "popular",
     initialState,
-    reducers: {},
+    reducers: {
+        nextPage: {
+            reducer(state) {
+                state.currentPage++;
+            }
+        }, 
+        prevPage: {
+            reducer(state) {
+                state.currentPage--;
+            }
+        }
+    },
     extraReducers: {
-        [fetchPopularMovies.pending] (state) {
+        [fetchPopularMovies.pending](state) {
             if (state.status === "idle") {
                 state.status = "pending";
             }
         },
 
-        [fetchPopularMovies.fulfilled] (state, action) {
-            const {results, page, total_pages} = action.payload;
+        [fetchPopularMovies.fulfilled](state, action) {
+            const { results, page, total_pages } = action.payload;
 
-            popularAdapter.upsertMany(state, results);
+            popularAdapter.setAll(state, results);
             state.totalPages = total_pages;
             state.currentPage = page;
             state.status = "succeded";
         },
 
-        [fetchPopularMovies] (state, action) {
-            state.error = action.error
+        [fetchPopularMovies.rejected](state, action) {
+            state.error = action.error;
         }
     }
 });
 
 export default popularSlice.reducer;
+export const {nextPage, prevPage} = popularSlice.actions;
+
 export const popularMovieStatus = state => state.popular.status;
+export const totalPopularPage = state => state.popular.totalPages;
 
 export const {
     selectAll: selectPopularMovies

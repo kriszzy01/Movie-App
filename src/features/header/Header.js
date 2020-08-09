@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import {useDispatch} from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
+import { fetchSearchResults } from "../slices/searchSlice";
 import "./Header.css";
 
 export const Header = () => {
@@ -13,28 +15,34 @@ export const Header = () => {
     const timesIcon = <FontAwesomeIcon icon={faTimes} />;
     const searchIcon = <FontAwesomeIcon icon={faSearch} />;
 
+    const toggleNav = () => setShowNav(!showNav);
+
     const navItems = ["Home", "Popular", "Top Rated", "Upcoming"];
     const navMenu = navItems.map(item => {
         return (
             <li key={item}>
-                <NavLink exact to={item === "Home" ? "/Movie-App" : `/${item}`}>{item}</NavLink>
+                <NavLink exact to={item === "Home" ? "/Movie-App" : `/${item}`} onClick={toggleNav}>{item}</NavLink>
             </li>
         );
     });
 
-    const toggleNav = () => setShowNav(!showNav);
-
     const handleSearchInput = event => setSearchInput(event.target.value);
+    const dispatch = useDispatch();
 
     const searchMovie = () => {
+        let previousSearch = null;
 
         if (searchInput === "") {
             setShowSearchInput(!showSearchInput);
+        } else if (searchInput === previousSearch ) {
+            return;
         } else {
-            //Some command to search movie
+            dispatch(fetchSearchResults(searchInput));
+            previousSearch = searchInput;
             setSearchInput("");
             setShowSearchInput(!showSearchInput);
         }
+        console.log(previousSearch)
     };
 
     return (
@@ -47,15 +55,19 @@ export const Header = () => {
                 <ul>{navMenu}</ul>
             </nav>
 
-            <input
-                type="text"
-                value={searchInput}
-                onChange={handleSearchInput}
-                placeholder="Enter Name of Movie"
-                className={showSearchInput ? "searchBtn showSearchInput" : "searchBtn hideSearchInput"}
-            />
+            <section className={showSearchInput ? "searchBtn showSearchInput" : "searchBtn hideSearchInput"}>
+                <p onClick={searchMovie}>
+                    {searchInput === "" ? searchIcon: <NavLink to="/Search Results">{searchIcon}</NavLink>}
+                </p>
 
-            <p className="searchBtn" onClick={searchMovie}>{searchIcon}</p>
+                <input
+                    type="text"
+                    value={searchInput}
+                    onChange={handleSearchInput}
+                    placeholder="Search Movie"
+                />
+            </section>
+
         </header>
     );
 };

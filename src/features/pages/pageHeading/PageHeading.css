@@ -1,0 +1,25 @@
+.pageHeading {
+    padding: 0.5rem;
+    display: flex;
+    font-weight: bold;
+    place-items: center;
+}
+
+.pageHeading h1 {
+    font-size: 0.7rem;
+}
+
+.pageHeading p {
+    font-size: 0.5rem;
+    margin-left: auto;
+}
+
+.pageHeading a {
+    color: black;
+}
+
+@media screen and (min-width: 600px) {
+    .pageHeading {
+        padding: 0.5rem 25vw;
+    }
+}

@@ -1,13 +1,23 @@
 .card {
-    border: 1px solid white;
-    width: 150px;
-    height: 200px;
-    margin-bottom: 1rem;
+    width: 6.4rem;
+    height: auto;
+    margin-bottom: 0rem;
+    border: 5px solid black;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.08);
+}
+
+.cardHover {
+    width: 6rem;
 }
 
 .card img {
-    width: inherit;
-    height: inherit;
+    width: 6rem;
+    height: 200px;
 }
 
 .card p:nth-child(2) {

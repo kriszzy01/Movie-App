@@ -8,10 +8,11 @@ header {
     background-color: #000000;
     position: fixed;
     width: 100vw;
+    z-index: 10;
 }
 
 header input {
-    margin: 0 0.5rem 0 auto;
+    margin: 0 0.5rem 0 0.5rem;
     padding: 0.2rem;
 }
 
@@ -44,13 +45,75 @@ nav a {
 }
 
 .showSearchInput {
-    visibility: visible;
+    transform: translate(0, 0);
 }
 
 .hideSearchInput {
-    visibility: hidden;
+    transform: translate(8.8rem, 0);
 }
 
 .searchBtn {
-    margin-right: 0.4rem;
+    display: grid;
+    grid-template-columns: 1rem 1fr;
+    margin-left: auto;
+    transition: 0.3s;
 }
+
+.searchBtn a {
+    color: white;
+}
+
+.active {
+    color: teal;
+}
+
+@media screen and (min-width: 600px) {
+    nav {
+        position: relative;
+        transition: 0.5s;
+        height: auto;
+        width: auto;
+        box-shadow: 0 0 0.1rem grey;
+        top: 0;
+        left: 0;
+        transition: none;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    nav ul {
+        display: flex;
+    }
+
+    nav li {
+        margin: 0 1rem ;
+    }
+
+    nav a {
+        border: 1px solid white;
+        padding: 0.5rem;
+        border-radius: 2rem;
+        font-size: 0.5rem;
+    }
+
+    .hideNav {
+        transform: translate(0, 0);
+    }
+
+    .hideSearchInput {
+        transform: translate(0, 0);
+    }
+
+    .searchBtn {
+        padding-right: 1rem;
+    }
+
+    .toggleNavBtn {
+        display: none;
+    }
+
+    .active {
+        color: black;
+        background-color: white;
+    }
+} 
