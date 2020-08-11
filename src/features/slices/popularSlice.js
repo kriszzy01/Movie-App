@@ -38,6 +38,13 @@ const popularSlice = createSlice({
             reducer(state) {
                 state.currentPage--;
             }
+        },
+        resetPopularPage: {
+            reducer(state) {
+                if (state.currentPage > 1) {
+                    state.currentPage = 1;
+                }
+            }
         }
     },
     extraReducers: {
@@ -63,7 +70,7 @@ const popularSlice = createSlice({
 });
 
 export default popularSlice.reducer;
-export const {nextPage, prevPage, toggleShowMovieDetails} = popularSlice.actions;
+export const {nextPage, prevPage, toggleShowMovieDetails, resetPopularPage} = popularSlice.actions;
 
 export const popularMovieStatus = state => state.popular.status;
 export const totalPopularPage = state => state.popular.totalPages;

@@ -27,7 +27,7 @@ export const MovieDetails = ({ MovieId }) => {
 
     const handleSetMovieId = () => {
         dispatch(toggleShowMovieDetails());
-    }
+    };
 
     return (
         <>

@@ -38,6 +38,13 @@ const upComingSlice = createSlice({
             reducer(state) {
                 state.currentPage--;
             }
+        },
+        resetUpComingPage: {
+            reducer(state) {
+                if (state.currentPage > 1) {
+                    state.currentPage = 1;
+                }
+            }
         }
     },
     extraReducers: {
@@ -63,7 +70,7 @@ const upComingSlice = createSlice({
 });
 
 export default upComingSlice.reducer;
-export const {nextPage, prevPage} = upComingSlice.actions;
+export const {nextPage, prevPage, resetUpComingPage} = upComingSlice.actions;
 
 export const upComingMovieStatus = state => state.upComing.status;
 export const totalUpComingPage = state => state.upComing.totalPages;

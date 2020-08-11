@@ -9,7 +9,6 @@ const initialState = topRatedAdapter.getInitialState({
     error: null
 });
 
-export const currentTopRatedPage = state => state.topRated.currentPage;
 export const fetchtopRatedMovies = createAsyncThunk("topRated/fetchtopRatedMovies",
     async (topRated, {getState}) => {
         const api_url = "https://api.themoviedb.org/3/movie/top_rated";
@@ -37,6 +36,13 @@ const topRatedSlice = createSlice({
             reducer(state) {
                 state.currentPage--;
             }
+        },
+        resetTopRatedPage: {
+            reducer(state) {
+                if (state.currentPage > 1) {
+                    state.currentPage = 1;
+                }
+            }
         }
     },
     extraReducers: {
@@ -62,10 +68,11 @@ const topRatedSlice = createSlice({
 });
 
 export default topRatedSlice.reducer;
-export const {nextPage, prevPage} = topRatedSlice.actions;
+export const {nextPage, prevPage, resetTopRatedPage} = topRatedSlice.actions;
 
 export const topRatedMovieStatus = state => state.topRated.status;
 export const totalTopRatedPage = state => state.topRated.totalPages;
+export const currentTopRatedPage = state => state.topRated.currentPage;
 
 export const {
     selectAll: selectTopRatedMovies,

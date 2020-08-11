@@ -37,6 +37,13 @@ const searchSlice = createSlice({
             reducer(state) {
                 state.currentPage--;
             }
+        },
+        resetSearchPage: {
+            reducer(state) {
+                if (state.currentPage > 1) {
+                    state.currentPage = 1;
+                }
+            }
         }
     },
     extraReducers: {
@@ -64,7 +71,7 @@ const searchSlice = createSlice({
 export default searchSlice.reducer;
 export const currentSearchPage = state => state.search.currentPage;
 
-export const {nextPage, prevPage} = searchSlice.actions;
+export const {nextPage, prevPage, resetSearchPage} = searchSlice.actions;
 
 export const searchMovieStatus = state => state.search.status;
 export const totalSearchPage = state => state.search.totalPages;

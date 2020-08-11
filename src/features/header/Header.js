@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {useDispatch} from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
-import { fetchSearchResults } from "../slices/searchSlice";
+import { fetchSearchResults, resetSearchPage} from "../slices/searchSlice";
+import {resetPopularPage, fetchPopularMovies} from "../slices/popularSlice";
+import {resetUpComingPage, fetchUpComingMovies} from "../slices/upComingSlice";
+import {fetchtopRatedMovies, resetTopRatedPage} from "../slices/topRatedSlice";
 import "./Header.css";
 
 export const Header = () => {
@@ -15,34 +18,46 @@ export const Header = () => {
     const timesIcon = <FontAwesomeIcon icon={faTimes} />;
     const searchIcon = <FontAwesomeIcon icon={faSearch} />;
 
-    const toggleNav = () => setShowNav(!showNav);
+    const dispatch = useDispatch();
+
+    const toggleNav = () => {
+        setShowNav(!showNav);
+
+        dispatch(resetPopularPage());
+        dispatch(fetchPopularMovies());
+
+        dispatch(resetSearchPage());
+        dispatch(fetchSearchResults());
+
+        dispatch(resetUpComingPage());
+        dispatch(fetchUpComingMovies());
+
+        dispatch(resetTopRatedPage());
+        dispatch(fetchtopRatedMovies());
+    }
 
     const navItems = ["Home", "Popular", "Top Rated", "Upcoming"];
     const navMenu = navItems.map(item => {
         return (
             <li key={item}>
-                <NavLink exact to={item === "Home" ? "/Movie-App" : `/${item}`} onClick={toggleNav}>{item}</NavLink>
+                <NavLink exact to={item === "Home" ? "/Movie-App" : `/${item}`} onClick={() => toggleNav(item)}>{item}</NavLink>
             </li>
         );
     });
 
     const handleSearchInput = event => setSearchInput(event.target.value);
-    const dispatch = useDispatch();
 
     const searchMovie = () => {
-        let previousSearch = null;
 
         if (searchInput === "") {
             setShowSearchInput(!showSearchInput);
-        } else if (searchInput === previousSearch ) {
-            return;
-        } else {
+        } 
+
+        else {
             dispatch(fetchSearchResults(searchInput));
-            previousSearch = searchInput;
             setSearchInput("");
             setShowSearchInput(!showSearchInput);
         }
-        console.log(previousSearch)
     };
 
     return (
@@ -56,7 +71,7 @@ export const Header = () => {
             </nav>
 
             <section className={showSearchInput ? "searchBtn showSearchInput" : "searchBtn hideSearchInput"}>
-                <p onClick={searchMovie}>
+                <p onClick={searchMovie} >
                     {searchInput === "" ? searchIcon: <NavLink to="/Search Results">{searchIcon}</NavLink>}
                 </p>
 
