@@ -57,9 +57,6 @@ nav a {
     grid-template-columns: 1rem 1fr;
     margin-left: auto;
     transition: 0.3s;
-}
-
-.searchBtn a {
     color: white;
 }
 
