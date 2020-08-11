@@ -1,0 +1,71 @@
+.background {
+    height: 85vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(1px);
+    -webkit-filter: blur(1px);
+}
+
+.text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(0, 0, 0);
+    opacity: 0.7;
+    color: white;
+    padding-top: 5rem;
+    font-size: 0.6rem;
+}
+
+.text h1 {
+    grid-area: h1;
+    font-size: 2rem;
+}
+
+.rating {
+    grid-area: p1;
+    padding-top: 0.5rem;
+}
+
+.year {
+    grid-area: p2;
+    padding-top: 0.5rem;
+}
+
+.overview {
+    grid-area: p3;
+    padding-top: 1rem;
+}
+
+.text section {
+    width: 80%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 5rem 1fr;
+    grid-template-rows: repeat(3, auto);
+    grid-template-areas: 
+        "h1 h1"
+        "p1 p2"
+        "p3 p3";
+}
+
+.text button {
+    position: absolute;
+    bottom: 5rem;
+    right: 45%;
+    font-size: 2rem;
+    border-radius: 50%;
+    text-align: center;
+    background-color: black;
+    color: red;
+    border: none;
+}
+
+@media screen and (min-width: 600px) {
+    .text section {
+        width: 50%;
+    }
+}

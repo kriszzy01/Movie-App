@@ -70,5 +70,6 @@ export const searchMovieStatus = state => state.search.status;
 export const totalSearchPage = state => state.search.totalPages;
 
 export const {
-    selectAll: selectSearchMovies
+    selectAll: selectSearchMovies,
+    selectById: selectSearchMovieById
 } = searchAdapter.getSelectors(state => state.search)

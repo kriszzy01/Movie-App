@@ -68,5 +68,6 @@ export const topRatedMovieStatus = state => state.topRated.status;
 export const totalTopRatedPage = state => state.topRated.totalPages;
 
 export const {
-    selectAll: selectTopRatedMovies
+    selectAll: selectTopRatedMovies,
+    selectById: selectTopRatedMovieById
 } = topRatedAdapter.getSelectors(state => state.topRated);

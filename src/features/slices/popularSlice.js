@@ -63,11 +63,12 @@ const popularSlice = createSlice({
 });
 
 export default popularSlice.reducer;
-export const {nextPage, prevPage} = popularSlice.actions;
+export const {nextPage, prevPage, toggleShowMovieDetails} = popularSlice.actions;
 
 export const popularMovieStatus = state => state.popular.status;
 export const totalPopularPage = state => state.popular.totalPages;
 
 export const {
-    selectAll: selectPopularMovies
+    selectAll: selectPopularMovies,
+    selectById: selectPopularMovieByID
 } = popularAdapter.getSelectors(state => state.popular)

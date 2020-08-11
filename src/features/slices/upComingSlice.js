@@ -69,5 +69,6 @@ export const upComingMovieStatus = state => state.upComing.status;
 export const totalUpComingPage = state => state.upComing.totalPages;
 
 export const {
-    selectAll: selectUpComingMovies
+    selectAll: selectUpComingMovies,
+    selectById: selectUpComingMovieById
 } = upComingAdapter.getSelectors(state => state.upComing);
