@@ -5,15 +5,18 @@
 .movieList {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
     place-items: center;
-    gap: 1rem;
-    padding: 0.5rem;
 }
 
 .movieCategory {
     display: flex;
     flex-direction: column;
     margin-bottom: 1rem;
+}
+
+.movieCategory:nth-child(1) {
+    padding-top: calc(10vh + 0.5rem);
 }
 
 @media screen and (min-width: 600px) {

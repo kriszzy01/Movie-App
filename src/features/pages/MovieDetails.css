@@ -1,5 +1,5 @@
 .background {
-    height: 85vh;
+    height: 100vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -9,6 +9,9 @@
 
 .text {
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    place-items: center;
     bottom: 0;
     left: 0;
     height: 100%;
@@ -16,13 +19,13 @@
     background-color: rgb(0, 0, 0);
     opacity: 0.7;
     color: white;
-    padding-top: 5rem;
     font-size: 0.6rem;
+    
 }
 
 .text h1 {
     grid-area: h1;
-    font-size: 2rem;
+    font-size: 1rem;
 }
 
 .rating {
@@ -54,12 +57,10 @@
 
 .text button {
     position: absolute;
-    bottom: 5rem;
-    right: 45%;
+    bottom: 0;
     font-size: 2rem;
     border-radius: 50%;
-    text-align: center;
-    background-color: black;
+    background-color: transparent;
     color: red;
     border: none;
 }

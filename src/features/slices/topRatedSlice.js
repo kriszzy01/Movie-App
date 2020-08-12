@@ -30,11 +30,13 @@ const topRatedSlice = createSlice({
         nextPage: {
             reducer(state) {
                 state.currentPage++;
+                state.status = "idle";
             }
         }, 
         prevPage: {
             reducer(state) {
                 state.currentPage--;
+                state.status = "idle";
             }
         },
         resetTopRatedPage: {

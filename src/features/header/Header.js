@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import {useDispatch} from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -22,7 +22,9 @@ export const Header = () => {
 
     const toggleNav = () => {
         setShowNav(!showNav);
+    };
 
+    const resetPage = () => {
         dispatch(resetPopularPage());
         dispatch(fetchPopularMovies());
 
@@ -34,13 +36,15 @@ export const Header = () => {
 
         dispatch(resetTopRatedPage());
         dispatch(fetchtopRatedMovies());
-    }
+
+        toggleNav();
+    };
 
     const navItems = ["Home", "Popular", "Top Rated", "Upcoming"];
     const navMenu = navItems.map(item => {
         return (
             <li key={item}>
-                <NavLink exact to={item === "Home" ? "/Movie-App" : `/${item}`} onClick={() => toggleNav(item)}>{item}</NavLink>
+                <NavLink exact to={item === "Home" ? "/Movie-App" : `/${item}`} onClick={resetPage}>{item}</NavLink>
             </li>
         );
     });
