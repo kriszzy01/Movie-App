@@ -75,17 +75,17 @@ export const Header = () => {
                 <ul>{navMenu}</ul>
             </nav>
 
-            <section className={showSearchInput ? "searchBtn showSearchInput" : "searchBtn hideSearchInput"}>
-                <p onClick={searchMovie} >
-                    {searchInput === "" ? searchIcon: <NavLink to="/Search Results">{searchIcon}</NavLink>}
-                </p>
-
+            <section className= "searchBtn">
                 <input
                     type="text"
                     value={searchInput}
                     onChange={handleSearchInput}
                     placeholder="Search Movie"
+                    className={showSearchInput ? "showSearchInput" : "hideSearchInput"}
                 />
+                <p onClick={searchMovie} >
+                    {searchInput === "" ? searchIcon: <NavLink to="/Search Results">{searchIcon}</NavLink>}
+                </p>
             </section>
 
         </header>

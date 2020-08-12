@@ -31,13 +31,17 @@ const popularSlice = createSlice({
     reducers: {
         nextPage: {
             reducer(state) {
-                state.currentPage++;
+                if (state.currentPage !== state.totalPages) {
+                    state.currentPage++;
+                }
                 state.status = "idle";
             }
         }, 
         prevPage: {
             reducer(state) {
-                state.currentPage--;
+                if (state.currentPage !== state.totalPages) {
+                    state.currentPage--;
+                }
                 state.status = "idle";
             }
         },
