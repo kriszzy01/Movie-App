@@ -52,6 +52,7 @@ export const Header = () => {
     const handleSearchInput = event => setSearchInput(event.target.value);
 
     const searchMovie = () => {
+        dispatch(resetSearchPage());
 
         if (searchInput === "") {
             setShowSearchInput(!showSearchInput);
