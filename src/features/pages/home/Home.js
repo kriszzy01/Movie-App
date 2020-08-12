@@ -8,6 +8,7 @@ import { PageHeading } from "../pageHeading/PageHeading";
 import "./Home.css"
 import { showMovieDetails } from "../../slices/movieDetailSlice";
 import { MovieDetails } from "../MovieDetails";
+import {LoadingIndicator} from "../LoadingIndicator";
 
 export const Home = () => {
     const [MovieId, setMovieId] = useState("");
@@ -57,9 +58,10 @@ export const Home = () => {
 
     return (
         <main>
-            {showMovieDetail && <MovieDetails MovieId={MovieId} />}
+            {popularStatus !== "succeded" && topRatedStatus !== "succeded" && upComingStatus !== "succeded" && <LoadingIndicator/>}
+            {popularStatus === "succeded" && topRatedStatus === "succeded" && upComingStatus === "succeded" && showMovieDetail && <MovieDetails MovieId={MovieId} />}
 
-            {!showMovieDetail &&
+            {popularStatus === "succeded" && topRatedStatus === "succeded" && upComingStatus === "succeded" && !showMovieDetail &&
                 <>
                     <section className="movieCategory">
                         <PageHeading page="Popular" browseAll={true} />

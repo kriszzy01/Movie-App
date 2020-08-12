@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Card } from "../card/Card";
-import { selectSearchMovies } from "../slices/searchSlice";
+import { selectSearchMovies, searchMovieStatus } from "../slices/searchSlice";
 import { showMovieDetails } from "../slices/movieDetailSlice";
 import { PageHeading } from "./pageHeading/PageHeading";
 import { Pagination } from "./pagination/Pagination";
 import { MovieDetails } from "./MovieDetails";
+import {LoadingIndicator} from "./LoadingIndicator";
 
 export const SearchResults = () => {
     const [MovieId, setMovieId] = useState("");
 
     const searchMoviesArray = useSelector(selectSearchMovies);
     const showMovieDetail = useSelector(showMovieDetails);
+    const searchStatus = useSelector(searchMovieStatus);
 
     const searchResults = searchMoviesArray.map(movies => {
         const { title, vote_average: rating, poster_path: poster, release_date: year, id } = movies;
@@ -21,8 +23,9 @@ export const SearchResults = () => {
 
     return (
         <main>
-            {showMovieDetail && <MovieDetails MovieId={MovieId} />}
-            {!showMovieDetail &&
+            {searchStatus !== "succeded" && <LoadingIndicator/>}
+            {searchStatus === "succeded" && showMovieDetail && <MovieDetails MovieId={MovieId} />}
+            {searchStatus === "succeded" && !showMovieDetail &&
                 <section className="movieCategory">
                     <PageHeading page="Search" />
                     <section className="movieList">{searchResults}</section>

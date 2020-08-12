@@ -6,6 +6,7 @@ import { showMovieDetails } from "../slices/movieDetailSlice";
 import { PageHeading } from "./pageHeading/PageHeading";
 import { Pagination } from "./pagination/Pagination";
 import { MovieDetails } from "./MovieDetails";
+import {LoadingIndicator} from "./LoadingIndicator";
 
 export const Upcoming = () => {
     const [MovieId, setMovieId] = useState("");
@@ -32,8 +33,9 @@ export const Upcoming = () => {
 
     return (
         <main>
-            {showMovieDetail && <MovieDetails MovieId={MovieId} />}
-            {!showMovieDetail &&
+            {upComingStatus !== "succeded" && <LoadingIndicator/>}
+            {upComingStatus === "succeded" && showMovieDetail && <MovieDetails MovieId={MovieId} />}
+            {upComingStatus === "succeded" && !showMovieDetail &&
                 <section className="movieCategory">
                     <PageHeading page="upComing" />
                     <section className="movieList">{upComingMovies}</section>

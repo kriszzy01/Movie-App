@@ -6,6 +6,7 @@ import { showMovieDetails } from "../slices/movieDetailSlice";
 import { PageHeading } from "./pageHeading/PageHeading";
 import { Pagination } from "./pagination/Pagination";
 import { MovieDetails } from "./MovieDetails";
+import {LoadingIndicator} from "./LoadingIndicator";
 
 export const TopRated = () => {
     const [MovieId, setMovieId] = useState("");
@@ -32,8 +33,9 @@ export const TopRated = () => {
 
     return (
         <main>
-            {showMovieDetail && <MovieDetails MovieId={MovieId} />}
-            {!showMovieDetail &&
+            {topRatedStatus !== "succeded" && <LoadingIndicator/>}
+            {topRatedStatus === "succeded" && showMovieDetail && <MovieDetails MovieId={MovieId} />}
+            {topRatedStatus === "succeded" && !showMovieDetail &&
                 <section className="movieCategory">
                     <PageHeading page="Top Rated" />
                     <section className="movieList">{topRatedMovies}</section>

@@ -57,7 +57,11 @@ nav a {
     grid-template-columns: 1rem 1fr;
     margin-left: auto;
     transition: 0.3s;
-    color: white;
+}
+
+.searchBtn a {
+    color: teal;
+    background-color: black;
 }
 
 .active {
@@ -110,7 +114,7 @@ nav a {
     }
 
     .active {
-        color: black;
         background-color: white;
+        color: black;
     }
 } 

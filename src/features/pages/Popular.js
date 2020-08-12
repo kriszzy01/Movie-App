@@ -6,6 +6,7 @@ import {showMovieDetails} from "../slices/movieDetailSlice";
 import { PageHeading } from "./pageHeading/PageHeading";
 import { Pagination } from "./pagination/Pagination";
 import { MovieDetails } from "./MovieDetails";
+import {LoadingIndicator} from "./LoadingIndicator";
 
 export const Popular = () => {
     const [MovieId, setMovieId] = useState("");
@@ -32,8 +33,9 @@ export const Popular = () => {
 
     return (
         <main>
-            {showMovieDetail && <MovieDetails MovieId={MovieId}/>}
-            {!showMovieDetail &&
+            {popularStatus !== "succeded" && <LoadingIndicator/>}
+            {popularStatus === "succeded" && showMovieDetail && <MovieDetails MovieId={MovieId}/>}
+            {popularStatus === "succeded" && !showMovieDetail &&
                 <section className="movieCategory">
                     <PageHeading page="Popular" />
                     <section className="movieList">{popularMovies}</section>
