@@ -58,7 +58,7 @@ export const Home = () => {
 
     return (
         <main>
-            {upComingStatus !== "succeded" && <LoadingIndicator/>}
+            {popularStatus !== "succeded" && topRatedStatus !== "succeded" && upComingStatus !== "succeded" && <LoadingIndicator/>}
             {popularStatus === "succeded" && topRatedStatus === "succeded" && upComingStatus === "succeded" && showMovieDetail && <MovieDetails MovieId={MovieId} />}
 
             {popularStatus === "succeded" && topRatedStatus === "succeded" && upComingStatus === "succeded" && !showMovieDetail &&
