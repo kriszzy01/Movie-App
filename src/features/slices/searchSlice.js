@@ -12,13 +12,13 @@ const initialState = searchAdapter.getInitialState({
 
 export const fetchSearchResults = createAsyncThunk("search/fetchSearchResults",
     async (query, {getState}) => {
-        const queryString = encodeURI(query);
+        const {currentPage, searchQuery} = getState().search;
+        
+        const queryString = encodeURI(searchQuery);
         const api_url = "https://api.themoviedb.org/3/search/movie";
         const key = "600f5cedd909fa355f1beee66846ab98";
 
-        const {currentPage, searchQuery} = getState().search;
-
-        let request_url = `${api_url}?api_key=${key}&query=${searchQuery}&language=en-US&page=${currentPage}&include_adult=false`;
+        let request_url = `${api_url}?api_key=${key}&query=${queryString}&language=en-US&page=${currentPage}&include_adult=false`;
 
         const response = await fetch(request_url);
         return response.json();
