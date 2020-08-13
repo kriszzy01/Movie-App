@@ -3,6 +3,7 @@ import {createAsyncThunk, createEntityAdapter, createSlice} from "@reduxjs/toolk
 const searchAdapter = createEntityAdapter();
 
 const initialState = searchAdapter.getInitialState({
+    searchQuery: "",
     currentPage: 1,
     totalPages: "",
     status: "idle",
@@ -15,9 +16,9 @@ export const fetchSearchResults = createAsyncThunk("search/fetchSearchResults",
         const api_url = "https://api.themoviedb.org/3/search/movie";
         const key = "600f5cedd909fa355f1beee66846ab98";
 
-        const {currentPage} = getState().popular;
+        const {currentPage, searchQuery} = getState().search;
 
-        let request_url = `${api_url}?api_key=${key}&query=${queryString}&language=en-US&page=${currentPage}&include_adult=false`;
+        let request_url = `${api_url}?api_key=${key}&query=${searchQuery}&language=en-US&page=${currentPage}&include_adult=false`;
 
         const response = await fetch(request_url);
         return response.json();
@@ -28,19 +29,26 @@ const searchSlice = createSlice({
     name: "search",
     initialState,
     reducers: {
+        saveSearchQuery: {
+            reducer(state, action) {
+                state.searchQuery = action.payload;
+            }
+        },
         nextPage: {
             reducer(state) {
-                if (state.currentPage !== state.totalPages) {
-                    state.currentPage++;
+                if (state.currentPage === state.totalPages) {
+                    return;
                 }
+                state.currentPage++
                 state.status = "idle";
             }
         }, 
         prevPage: {
             reducer(state) {
-                if (state.currentPage !== state.totalPages) {
-                    state.currentPage--;
+                if (state.currentPage === state.totalPages) {
+                    return;
                 }
+                state.currentPage--
                 state.status = "idle";
             }
         },
@@ -77,7 +85,7 @@ const searchSlice = createSlice({
 export default searchSlice.reducer;
 export const currentSearchPage = state => state.search.currentPage;
 
-export const {nextPage, prevPage, resetSearchPage} = searchSlice.actions;
+export const {nextPage, prevPage, resetSearchPage, saveSearchQuery} = searchSlice.actions;
 
 export const searchMovieStatus = state => state.search.status;
 export const totalSearchPage = state => state.search.totalPages;

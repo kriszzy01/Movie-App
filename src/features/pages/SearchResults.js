@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Card } from "../card/Card";
-import { selectSearchMovies, searchMovieStatus } from "../slices/searchSlice";
+import { selectSearchMovies, searchMovieStatus, fetchSearchResults } from "../slices/searchSlice";
 import { showMovieDetails } from "../slices/movieDetailSlice";
 import { PageHeading } from "./pageHeading/PageHeading";
 import { Pagination } from "./pagination/Pagination";
@@ -20,6 +20,15 @@ export const SearchResults = () => {
 
         return <Card title={title} rating={rating} poster={poster} year={year} setMovieId={setMovieId} id={id} key={title + rating} />
     });
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (searchStatus === "idle") {
+            dispatch(fetchSearchResults());
+        }
+
+    }, [searchStatus, dispatch]);
 
     return (
         <main>

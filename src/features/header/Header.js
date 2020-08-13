@@ -3,7 +3,7 @@ import {useDispatch} from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
-import { fetchSearchResults, resetSearchPage} from "../slices/searchSlice";
+import { fetchSearchResults, resetSearchPage, saveSearchQuery} from "../slices/searchSlice";
 import {resetPopularPage, fetchPopularMovies} from "../slices/popularSlice";
 import {resetUpComingPage, fetchUpComingMovies} from "../slices/upComingSlice";
 import {fetchtopRatedMovies, resetTopRatedPage} from "../slices/topRatedSlice";
@@ -59,7 +59,8 @@ export const Header = () => {
         } 
 
         else {
-            dispatch(fetchSearchResults(searchInput));
+            dispatch(saveSearchQuery(searchInput))
+            dispatch(fetchSearchResults());
             setSearchInput("");
             setShowSearchInput(!showSearchInput);
         }
